@@ -302,7 +302,7 @@ class InterfaceGroup(object):
         cut_meta = self.meta[rows]
         return cut_meta
 
-    def query_meta(self, qdict, **kwargs):
+    def query_meta(self, qdict, rest_frame=False, **kwargs):
         """
         Parameters
         ----------
@@ -317,6 +317,9 @@ class InterfaceGroup(object):
         IDs : int ndarray
         """
         # Query
+        if rest_frame:
+            self.meta['WREST_MIN'] = self.meta['WV_MIN']/(1+self.meta['zem_GROUP'])
+            self.meta['WREST_MAX'] = self.meta['WV_MAX']/(1+self.meta['zem_GROUP'])
         matches = spdbu.query_table(self.meta, qdict, tbl_name='meta data')
 
         # Return
