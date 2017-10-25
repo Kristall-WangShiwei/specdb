@@ -463,6 +463,7 @@ class IgmSpec(SpecDB):
         """
         # db_file
         SpecDB.__init__(self, db_file=db_file, skip_test=skip_test, **kwargs)
+        self.quasars = Table(self.hdf['quasars'].value)
 
     def grab_dbfile(self, version=None, **kwargs):
         """ Grabs the DB file
